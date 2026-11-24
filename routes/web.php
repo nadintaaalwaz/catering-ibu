@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Models\Category;
 use App\Models\Menu;
 use Illuminate\Support\Facades\Route;
@@ -12,13 +13,11 @@ Route::get('/', fn () => Inertia::render('Home', ['nama' => 'Dapur Ibu']));
 // Admin
 Route::prefix('admin')->group(function () {
 
-    // Hanya untuk yang belum login
     Route::middleware('guest')->group(function () {
         Route::get('login', [AuthController::class, 'create'])->name('login');
         Route::post('login', [AuthController::class, 'store']);
     });
 
-    // Hanya untuk yang sudah login
     Route::middleware('auth')->group(function () {
         Route::get('/', fn () => Inertia::render('Admin/Dashboard', [
             'totalMenus' => Menu::count(),
@@ -26,5 +25,9 @@ Route::prefix('admin')->group(function () {
         ]))->name('admin.dashboard');
 
         Route::post('logout', [AuthController::class, 'destroy'])->name('logout');
+
+        Route::resource('categories', CategoryController::class)
+            ->except('show')
+            ->names('admin.categories');
     });
 });
