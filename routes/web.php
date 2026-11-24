@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\MenuController;
 use App\Models\Category;
 use App\Models\Menu;
 use Illuminate\Support\Facades\Route;
@@ -29,5 +30,12 @@ Route::prefix('admin')->group(function () {
         Route::resource('categories', CategoryController::class)
             ->except('show')
             ->names('admin.categories');
+
+        Route::patch('menus/{menu}/toggle', [MenuController::class, 'toggle'])
+            ->name('admin.menus.toggle');
+
+        Route::resource('menus', MenuController::class)
+            ->except('show')
+            ->names('admin.menus');
     });
 });
