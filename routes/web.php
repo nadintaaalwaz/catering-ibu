@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Models\Category;
 use App\Models\Menu;
 use Illuminate\Support\Facades\Route;
@@ -37,5 +38,8 @@ Route::prefix('admin')->group(function () {
         Route::resource('menus', MenuController::class)
             ->except('show')
             ->names('admin.menus');
+
+        Route::get('settings', [SettingController::class, 'edit'])->name('admin.settings.edit');
+        Route::put('settings', [SettingController::class, 'update'])->name('admin.settings.update');
     });
 });

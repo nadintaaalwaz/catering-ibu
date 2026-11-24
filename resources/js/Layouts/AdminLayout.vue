@@ -17,6 +17,7 @@ const logout = () => router.post('/admin/logout');
                     <Link href="/admin">Dashboard</Link>
                     <Link href="/admin/categories">Kategori</Link>
                     <Link href="/admin/menus">Menu</Link>
+                    <Link href="/admin/settings">Pengaturan</Link>
                     <a href="/" target="_blank">Lihat Web</a>
                 </nav>
                 <button
