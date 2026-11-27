@@ -10,20 +10,27 @@ const logout = () => router.post('/admin/logout');
 
 <template>
     <div class="min-h-screen bg-stone-100">
-        <header class="bg-kon text-washi">
+        <header class="navbar-gelap text-washi">
             <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-3">
                 <nav class="flex flex-wrap items-center gap-4 text-sm">
-                    <span class="font-bold">Dapur Ibu</span>
-                    <Link href="/admin">Dashboard</Link>
-                    <Link href="/admin/categories">Kategori</Link>
-                    <Link href="/admin/menus">Menu</Link>
-                    <Link href="/admin/settings">Pengaturan</Link>
-                    <a href="/" target="_blank">Lihat Web</a>
+                    <span class="flex items-center gap-2">
+                        <img
+                            src="/images/logo.jpg"
+                            alt="Logo"
+                            class="h-8 w-8 rounded-full border border-emas object-cover"
+                        />
+                        <span class="font-display text-base font-bold text-emas">Admin</span>
+                    </span>
+                    <Link href="/admin" class="hover:text-emas">Dashboard</Link>
+                    <Link href="/admin/categories" class="hover:text-emas">Kategori</Link>
+                    <Link href="/admin/menus" class="hover:text-emas">Menu</Link>
+                    <Link href="/admin/settings" class="hover:text-emas">Pengaturan</Link>
+                    <a href="/" target="_blank" class="hover:text-emas">Lihat Web</a>
                 </nav>
                 <button
                     type="button"
                     @click="logout"
-                    class="rounded-lg bg-kertas/10 px-3 py-1.5 text-sm hover:bg-kertas/20"
+                    class="rounded-lg border border-emas/50 px-3 py-1.5 text-sm text-emas hover:bg-emas hover:text-black"
                 >
                     Keluar
                 </button>

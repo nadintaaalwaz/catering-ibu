@@ -18,11 +18,8 @@
     --color-kertas: #fbf8f1;
     --color-torii: #b3261e;
 
-    /* Warna jendela Jepang */
     --color-kayu: #4a2c17;
     --color-kayu-gelap: #1f130b;
-    --color-cahaya: #fbe3a1;
-    --color-amber: #f2b94b;
 }
 
 @layer base {
@@ -40,19 +37,64 @@
 }
 
 @layer components {
-    /* Batik kawung */
-    .bg-kawung {
-        background-color: #14141f;
-        background-image: url('/images/kawung.svg');
-        background-size: 60px 60px;
+    /* ===== Navbar & footer gelap: hitam + cahaya + kawung tipis ===== */
+    .navbar-gelap,
+    .footer-gelap {
+        position: relative;
+        isolation: isolate;
+        background-color: #0a0a0d;
     }
 
-    /* Kaca washi yang bersinar hangat */
-    .kaca-washi {
-        background: radial-gradient(circle at 35% 28%, #fff3bd 0%, #f2c46b 45%, #b9772f 100%);
+    .navbar-gelap {
+        border-bottom: 1px solid rgb(201 162 75 / 0.6);
+        box-shadow: 0 6px 26px -8px rgb(242 185 75 / 0.45);
     }
 
-    /* Jendela shoji: kusen kayu + kisi + cahaya hangat */
+    .footer-gelap {
+        border-top: 1px solid rgb(201 162 75 / 0.6);
+        box-shadow: 0 -6px 26px -8px rgb(242 185 75 / 0.35);
+    }
+
+    /* pola kawung emas, hanya samar */
+    .navbar-gelap::before,
+    .footer-gelap::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background-image: url('/images/kawung-emas.svg');
+        background-size: 56px 56px;
+        opacity: 0.16;
+        pointer-events: none;
+    }
+
+    /* cahaya hangat */
+    .navbar-gelap::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background:
+            radial-gradient(ellipse at 10% 130%, rgb(242 185 75 / 0.32), transparent 55%),
+            radial-gradient(ellipse at 92% -50%, rgb(242 185 75 / 0.14), transparent 50%);
+    }
+
+    .footer-gelap::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background: radial-gradient(ellipse at 50% -40%, rgb(242 185 75 / 0.28), transparent 60%);
+    }
+
+    /* ===== Hero beranda ===== */
+    .hero-cahaya {
+        background: radial-gradient(circle at 78% 50%, rgb(242 185 75 / 0.28), transparent 58%);
+    }
+
+    /* ===== Jendela shoji ===== */
     .shoji-frame {
         position: relative;
         overflow: hidden;
@@ -64,7 +106,6 @@
             0 2px 8px rgb(0 0 0 / 0.3);
     }
 
-    /* cahaya hangat di atas foto */
     .shoji-frame::before {
         content: '';
         position: absolute;
@@ -74,7 +115,6 @@
         background: radial-gradient(circle at 30% 22%, rgb(255 214 120 / 0.3), rgb(110 55 10 / 0.14) 100%);
     }
 
-    /* kisi-kisi kayu */
     .shoji-frame::after {
         content: '';
         position: absolute;
@@ -87,7 +127,15 @@
         background-size: calc(100% / var(--cols, 3)) calc(100% / var(--rows, 2));
     }
 
-    /* Panel kisi kecil (kumiko) di sisi jendela */
+    /* kisi di BELAKANG foto */
+    .shoji-frame.kisi-belakang::after {
+        z-index: 0;
+    }
+
+    .shoji-frame.kisi-belakang::before {
+        z-index: 1;
+    }
+
     .kumiko {
         flex: none;
         width: 26px;
@@ -98,7 +146,6 @@
         background-size: 10px 10px;
     }
 
-    /* Bingkai jendela besar: kumiko | shoji | kumiko */
     .jendela {
         display: flex;
         align-items: stretch;
@@ -110,32 +157,6 @@
             0 8px 20px rgb(0 0 0 / 0.45);
     }
 
-    /* Papan kayu tegak */
-    .papan-kayu {
-        background-color: var(--color-kayu-gelap);
-        background-image: repeating-linear-gradient(
-            90deg,
-            transparent 0,
-            transparent 58px,
-            rgb(0 0 0 / 0.55) 58px,
-            rgb(0 0 0 / 0.55) 60px
-        );
-    }
-
-    /* Garis hias di bawah judul */
-    .ornamen {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: var(--color-emas);
-    }
-
-    .ornamen::after {
-        content: '';
-        height: 1px;
-        flex: 1;
-        background: linear-gradient(to right, var(--color-emas), transparent);
-    }
     /* Lampu bersinar di belakang logo */
     .lampu {
         position: absolute;
@@ -158,41 +179,36 @@
         animation: lampu-berkedip 3.5s ease-in-out infinite;
     }
 
-    @keyframes lampu-berkedip {
-        0%,
-        100% {
-            opacity: 0.75;
-            transform: translate(-50%, -50%) scale(0.95);
-        }
-        50% {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1.08);
-        }
+    /* Garis hias di bawah judul */
+    .ornamen {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--color-emas);
     }
 
-    /* Hormati pengguna yang mematikan animasi di perangkatnya */
-    @media (prefers-reduced-motion: reduce) {
-        .lampu {
-            animation: none;
-        }
+    .ornamen::after {
+        content: '';
+        height: 1px;
+        flex: 1;
+        background: linear-gradient(to right, var(--color-emas), transparent);
     }
-    /* Variasi shoji: kisi di BELAKANG foto */
-    .shoji-frame.kisi-belakang::after {
-        z-index: 0;
-    }
+}
 
-    .shoji-frame.kisi-belakang::before {
-        z-index: 1;
+@keyframes lampu-berkedip {
+    0%,
+    100% {
+        opacity: 0.75;
+        transform: translate(-50%, -50%) scale(0.95);
     }
-    /* Latar hero: kawung emas halus */
-    .hero-kawung {
-        background-image: url('/images/kawung-emas.svg');
-        background-size: 80px 80px;
-        opacity: 0.45;
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.08);
     }
+}
 
-    /* Cahaya hangat di sisi kanan, di sekitar jendela */
-    .hero-cahaya {
-        background: radial-gradient(circle at 78% 50%, rgb(242 185 75 / 0.28), transparent 58%);
+@media (prefers-reduced-motion: reduce) {
+    .lampu {
+        animation: none;
     }
 }
