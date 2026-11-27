@@ -184,4 +184,15 @@
     .shoji-frame.kisi-belakang::before {
         z-index: 1;
     }
+    /* Latar hero: kawung emas halus */
+    .hero-kawung {
+        background-image: url('/images/kawung-emas.svg');
+        background-size: 80px 80px;
+        opacity: 0.45;
+    }
+
+    /* Cahaya hangat di sisi kanan, di sekitar jendela */
+    .hero-cahaya {
+        background: radial-gradient(circle at 78% 50%, rgb(242 185 75 / 0.28), transparent 58%);
+    }
 }

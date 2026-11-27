@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60" height="60" viewBox="0 0 60 60">
+  <defs>
+    <path id="petal" d="M0 -21.2 A30.8 30.8 0 0 1 0 21.2 A30.8 30.8 0 0 1 0 -21.2 Z" fill="#c9a24b" fill-opacity=".16" stroke="#c9a24b" stroke-width="1.6"/>
+    <g id="titik" fill="#c9a24b" fill-opacity=".7">
+      <circle r="1"/>
+      <circle cx="4.5" cy="0" r=".8"/>
+      <circle cx="2.25" cy="3.9" r=".8"/>
+      <circle cx="-2.25" cy="3.9" r=".8"/>
+      <circle cx="-4.5" cy="0" r=".8"/>
+      <circle cx="-2.25" cy="-3.9" r=".8"/>
+      <circle cx="2.25" cy="-3.9" r=".8"/>
+    </g>
+  </defs>
+
+  <use xlink:href="#petal" transform="translate(15 15) rotate(-45)"/>
+  <use xlink:href="#petal" transform="translate(45 15) rotate(45)"/>
+  <use xlink:href="#petal" transform="translate(15 45) rotate(45)"/>
+  <use xlink:href="#petal" transform="translate(45 45) rotate(-45)"/>
+
+  <g fill="#e0a858">
+    <circle cx="0" cy="0" r="2.4"/>
+    <circle cx="60" cy="0" r="2.4"/>
+    <circle cx="0" cy="60" r="2.4"/>
+    <circle cx="60" cy="60" r="2.4"/>
+    <circle cx="30" cy="30" r="2.4"/>
+  </g>
+
+  <use xlink:href="#titik" transform="translate(30 0)"/>
+  <use xlink:href="#titik" transform="translate(30 60)"/>
+  <use xlink:href="#titik" transform="translate(0 30)"/>
+  <use xlink:href="#titik" transform="translate(60 30)"/>
+</svg>

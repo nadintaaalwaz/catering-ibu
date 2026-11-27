@@ -23,9 +23,13 @@ const order = computed(() =>
 
     <PublicLayout>
         <!-- Hero: latar batik kawung + jendela shoji -->
-        <section class="relative overflow-hidden rounded-xl border-2 border-emas/50">
-            <div class="bg-kawung absolute inset-0"></div>
-            <div class="absolute inset-0 bg-linear-to-r from-black/85 via-black/60 to-black/30"></div>
+        <section class="relative overflow-hidden rounded-xl border-2 border-emas/50 bg-kayu-gelap">
+            <div
+                class="absolute inset-0"
+                style="background-image: url('/images/kawung-emas.svg'); background-size: 80px 80px; opacity: 0.6"
+            ></div>
+            <div class="hero-cahaya absolute inset-0"></div>
+            <div class="absolute inset-0 bg-linear-to-r from-black/70 via-black/25 to-transparent"></div>
 
             <div class="relative grid items-center gap-8 px-6 py-10 md:grid-cols-[1fr_auto] md:px-10">
                 <div class="text-washi">
