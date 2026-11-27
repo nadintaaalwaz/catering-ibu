@@ -4,13 +4,17 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\PublicController;
 use App\Models\Category;
 use App\Models\Menu;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-// Halaman publik (sementara)
-Route::get('/', fn () => Inertia::render('Home', ['nama' => 'Dapur Ibu']));
+// Halaman publik
+Route::get('/', [PublicController::class, 'home'])->name('home');
+Route::get('/menu', [PublicController::class, 'menus'])->name('menus');
+Route::get('/menu/{menu:slug}', [PublicController::class, 'show'])->name('menus.show');
+Route::get('/kontak', [PublicController::class, 'contact'])->name('contact');
 
 // Admin
 Route::prefix('admin')->group(function () {
