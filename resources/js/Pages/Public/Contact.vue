@@ -17,7 +17,7 @@ const chat = computed(() =>
     <PublicLayout>
         <h1 class="mb-4 text-2xl font-bold">Kontak</h1>
 
-        <div class="max-w-xl space-y-4 rounded-xl bg-white p-6 shadow">
+        <div class="max-w-xl space-y-4 rounded-xl bg-kertas p-6 shadow">
             <div v-if="site?.address">
                 <p class="text-sm text-stone-500">Alamat</p>
                 <p>{{ site.address }}</p>

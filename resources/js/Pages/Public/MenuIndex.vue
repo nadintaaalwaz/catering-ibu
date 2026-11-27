@@ -3,7 +3,7 @@ import { ref, watch } from 'vue';
 import { Head, router } from '@inertiajs/vue3';
 import PublicLayout from '../../Layouts/PublicLayout.vue';
 import MenuCard from '../../Components/MenuCard.vue';
-
+import SectionTitle from '../../Components/SectionTitle.vue';
 const props = defineProps({
     menus: Array,
     categories: Array,
@@ -37,13 +37,13 @@ watch(q, () => {
     <Head title="Menu" />
 
     <PublicLayout>
-        <h1 class="mb-4 text-2xl font-bold">Menu</h1>
+        <SectionTitle title="Menu" sub="お品書き · Daftar menu kami" />
 
         <input
             v-model="q"
             type="search"
             placeholder="Cari menu..."
-            class="mb-4 w-full rounded-lg border border-stone-300 bg-white px-4 py-2"
+            class="mb-4 w-full rounded-lg border border-stone-300 bg-kertas px-4 py-2"
         />
 
         <div class="mb-6 flex flex-wrap gap-2">
@@ -51,7 +51,7 @@ watch(q, () => {
                 type="button"
                 @click="pick('')"
                 class="rounded-full border px-4 py-1.5 text-sm"
-                :class="category === '' ? 'bg-stone-800 text-white' : 'bg-white'"
+                :class="category === '' ? 'bg-kon text-washi' : 'bg-kertas'"
             >
                 Semua
             </button>
@@ -61,7 +61,7 @@ watch(q, () => {
                 type="button"
                 @click="pick(c.slug)"
                 class="rounded-full border px-4 py-1.5 text-sm"
-                :class="category === c.slug ? 'bg-stone-800 text-white' : 'bg-white'"
+                :class="category === c.slug ? 'bg-kon text-washi' : 'bg-kertas'"
             >
                 {{ c.name }}
             </button>

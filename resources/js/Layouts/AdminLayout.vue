@@ -10,7 +10,7 @@ const logout = () => router.post('/admin/logout');
 
 <template>
     <div class="min-h-screen bg-stone-100">
-        <header class="bg-stone-800 text-white">
+        <header class="bg-kon text-washi">
             <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-3">
                 <nav class="flex flex-wrap items-center gap-4 text-sm">
                     <span class="font-bold">Dapur Ibu</span>
@@ -23,7 +23,7 @@ const logout = () => router.post('/admin/logout');
                 <button
                     type="button"
                     @click="logout"
-                    class="rounded-lg bg-white/10 px-3 py-1.5 text-sm hover:bg-white/20"
+                    class="rounded-lg bg-kertas/10 px-3 py-1.5 text-sm hover:bg-kertas/20"
                 >
                     Keluar
                 </button>

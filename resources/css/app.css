@@ -6,7 +6,95 @@
 @source '../js/**/*.vue';
 @source '../js/**/*.js';
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+@theme static {
+    --font-sans: 'Noto Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Shippori Mincho', 'Noto Serif', Georgia, serif;
+
+    --color-soga: #5b3a29;       /* coklat soga batik */
+    --color-soga-dark: #3b2418;
+    --color-kon: #1f2a44;        /* biru nila */
+    --color-emas: #c9a24b;       /* emas */
+    --color-washi: #f5efe0;      /* kertas washi */
+    --color-kertas: #fbf8f1;
+    --color-torii: #b3261e;      /* merah torii */
+}
+
+@layer base {
+    body {
+        background-color: var(--color-washi);
+        color: var(--color-soga-dark);
+    }
+
+    h1,
+    h2,
+    h3 {
+        font-family: var(--font-display);
+        font-weight: 700;
+    }
+}
+
+@layer components {
+    /* Pola parang (versi sederhana): pita bergelombang diagonal */
+    .bg-parang {
+        background-color: var(--color-kon);
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill='none' stroke='%23C9A24B' stroke-width='1.6' stroke-opacity='.35'%3E%3Cpath d='M0 40C10 40 10 20 20 20S30 0 40 0'/%3E%3Cpath d='M0 40C10 40 10 20 20 20S30 0 40 0' transform='translate(20 0)'/%3E%3Cpath d='M0 40C10 40 10 20 20 20S30 0 40 0' transform='translate(-20 0)'/%3E%3C/g%3E%3C/svg%3E");
+        background-size: 48px 48px;
+    }
+
+    /* Bingkai jendela shoji: kisi-kisi di atas foto */
+    .shoji-frame {
+        position: relative;
+        overflow: hidden;
+        border: 5px solid var(--color-soga);
+        border-radius: 4px;
+    }
+
+    .shoji-frame::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        --line: rgb(59 36 24 / 0.5);
+        background-image:
+            linear-gradient(to right, var(--line) 2px, transparent 2px),
+            linear-gradient(to bottom, var(--line) 2px, transparent 2px);
+        background-size: calc(100% / var(--cols, 3)) calc(100% / var(--rows, 2));
+    }
+
+    /* Jendela bulat (marumado) dengan kisi silang */
+    .marumado {
+        position: relative;
+        aspect-ratio: 1;
+        overflow: hidden;
+        border-radius: 9999px;
+        border: 8px solid var(--color-soga);
+        background-color: var(--color-washi);
+        box-shadow: 0 0 0 3px var(--color-emas);
+    }
+
+    .marumado::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.7;
+        background:
+            linear-gradient(var(--color-soga), var(--color-soga)) center / 4px 100% no-repeat,
+            linear-gradient(var(--color-soga), var(--color-soga)) center / 100% 4px no-repeat;
+    }
+
+    /* Garis hias di bawah judul: ◆────── */
+    .ornamen {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--color-emas);
+    }
+
+    .ornamen::after {
+        content: '';
+        height: 1px;
+        flex: 1;
+        background: linear-gradient(to right, var(--color-emas), transparent);
+    }
 }
