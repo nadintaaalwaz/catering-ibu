@@ -10,19 +10,26 @@ defineProps({ menu: Object });
         :href="`/menu/${menu.slug}`"
         class="block overflow-hidden rounded-lg border border-soga/20 bg-kertas shadow-sm transition hover:shadow-md"
     >
-        <div class="shoji-frame relative aspect-4/3 bg-washi" style="--cols: 3; --rows: 2">
-            <img
-                v-if="menu.image_url"
-                :src="menu.image_url"
-                :alt="menu.name"
-                class="h-full w-full object-cover"
-            />
-            <div v-else class="flex h-full items-center justify-center text-sm text-soga/50">
-                Belum ada foto
+        <div class="shoji-frame kisi-belakang relative aspect-4/3" style="--cols: 4; --rows: 3">
+            <!-- foto di depan kisi -->
+            <div class="relative z-10 h-full w-full p-4">
+                <img
+                    v-if="menu.image_url"
+                    :src="menu.image_url"
+                    :alt="menu.name"
+                    class="h-full w-full rounded-md object-cover shadow-lg ring-2 ring-kayu/60"
+                />
+                <div
+                    v-else
+                    class="flex h-full w-full items-center justify-center rounded-md bg-washi/70 text-sm text-soga/60 ring-2 ring-kayu/40"
+                >
+                    Belum ada foto
+                </div>
             </div>
+
             <span
                 v-if="!menu.is_available"
-                class="absolute top-2 left-2 z-10 rounded-full bg-torii px-3 py-1 text-xs font-medium text-white"
+                class="absolute top-2 left-2 z-20 rounded-full bg-torii px-3 py-1 text-xs font-medium text-white"
             >
                 Habis
             </span>

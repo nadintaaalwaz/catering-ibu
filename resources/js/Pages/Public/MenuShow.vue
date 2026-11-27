@@ -35,15 +35,20 @@ const order = computed(() => {
         <Link href="/menu" class="mb-4 inline-block text-sm text-soga/70">&larr; Kembali ke menu</Link>
 
         <div class="grid gap-6 md:grid-cols-2">
-            <div class="shoji-frame aspect-4/3 bg-washi" style="--cols: 3; --rows: 2">
-                <img
-                    v-if="menu.image_url"
-                    :src="menu.image_url"
-                    :alt="menu.name"
-                    class="h-full w-full object-cover"
-                />
-                <div v-else class="flex h-full items-center justify-center text-soga/50">
-                    Belum ada foto
+            <div class="shoji-frame kisi-belakang relative aspect-4/3" style="--cols: 5; --rows: 4">
+                <div class="relative z-10 h-full w-full p-5">
+                    <img
+                        v-if="menu.image_url"
+                        :src="menu.image_url"
+                        :alt="menu.name"
+                        class="h-full w-full rounded-md object-cover shadow-xl ring-2 ring-kayu/60"
+                    />
+                    <div
+                        v-else
+                        class="flex h-full w-full items-center justify-center rounded-md bg-washi/70 text-soga/60 ring-2 ring-kayu/40"
+                    >
+                        Belum ada foto
+                    </div>
                 </div>
             </div>
 

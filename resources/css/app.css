@@ -10,13 +10,19 @@
     --font-sans: 'Noto Sans', ui-sans-serif, system-ui, sans-serif;
     --font-display: 'Shippori Mincho', 'Noto Serif', Georgia, serif;
 
-    --color-soga: #5b3a29;       /* coklat soga batik */
+    --color-soga: #5b3a29;
     --color-soga-dark: #3b2418;
-    --color-kon: #1f2a44;        /* biru nila */
-    --color-emas: #c9a24b;       /* emas */
-    --color-washi: #f5efe0;      /* kertas washi */
+    --color-kon: #151a2e;
+    --color-emas: #c9a24b;
+    --color-washi: #f5efe0;
     --color-kertas: #fbf8f1;
-    --color-torii: #b3261e;      /* merah torii */
+    --color-torii: #b3261e;
+
+    /* Warna jendela Jepang */
+    --color-kayu: #4a2c17;
+    --color-kayu-gelap: #1f130b;
+    --color-cahaya: #fbe3a1;
+    --color-amber: #f2b94b;
 }
 
 @layer base {
@@ -34,56 +40,89 @@
 }
 
 @layer components {
-    /* Pola parang (versi sederhana): pita bergelombang diagonal */
-    .bg-parang {
-        background-color: var(--color-kon);
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill='none' stroke='%23C9A24B' stroke-width='1.6' stroke-opacity='.35'%3E%3Cpath d='M0 40C10 40 10 20 20 20S30 0 40 0'/%3E%3Cpath d='M0 40C10 40 10 20 20 20S30 0 40 0' transform='translate(20 0)'/%3E%3Cpath d='M0 40C10 40 10 20 20 20S30 0 40 0' transform='translate(-20 0)'/%3E%3C/g%3E%3C/svg%3E");
-        background-size: 48px 48px;
+    /* Batik kawung */
+    .bg-kawung {
+        background-color: #14141f;
+        background-image: url('/images/kawung.svg');
+        background-size: 60px 60px;
     }
 
-    /* Bingkai jendela shoji: kisi-kisi di atas foto */
+    /* Kaca washi yang bersinar hangat */
+    .kaca-washi {
+        background: radial-gradient(circle at 35% 28%, #fff3bd 0%, #f2c46b 45%, #b9772f 100%);
+    }
+
+    /* Jendela shoji: kusen kayu + kisi + cahaya hangat */
     .shoji-frame {
         position: relative;
         overflow: hidden;
-        border: 5px solid var(--color-soga);
-        border-radius: 4px;
+        border: 6px solid var(--color-kayu);
+        border-radius: 2px;
+        background: radial-gradient(circle at 35% 28%, #fff3bd 0%, #f2c46b 50%, #b9772f 100%);
+        box-shadow:
+            inset 0 0 0 2px rgb(0 0 0 / 0.3),
+            0 2px 8px rgb(0 0 0 / 0.3);
     }
 
+    /* cahaya hangat di atas foto */
+    .shoji-frame::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        background: radial-gradient(circle at 30% 22%, rgb(255 214 120 / 0.3), rgb(110 55 10 / 0.14) 100%);
+    }
+
+    /* kisi-kisi kayu */
     .shoji-frame::after {
         content: '';
         position: absolute;
         inset: 0;
+        z-index: 2;
         pointer-events: none;
-        --line: rgb(59 36 24 / 0.5);
         background-image:
-            linear-gradient(to right, var(--line) 2px, transparent 2px),
-            linear-gradient(to bottom, var(--line) 2px, transparent 2px);
+            linear-gradient(to right, var(--color-kayu) 3px, transparent 3px),
+            linear-gradient(to bottom, var(--color-kayu) 3px, transparent 3px);
         background-size: calc(100% / var(--cols, 3)) calc(100% / var(--rows, 2));
     }
 
-    /* Jendela bulat (marumado) dengan kisi silang */
-    .marumado {
-        position: relative;
-        aspect-ratio: 1;
-        overflow: hidden;
-        border-radius: 9999px;
-        border: 8px solid var(--color-soga);
-        background-color: var(--color-washi);
-        box-shadow: 0 0 0 3px var(--color-emas);
+    /* Panel kisi kecil (kumiko) di sisi jendela */
+    .kumiko {
+        flex: none;
+        width: 26px;
+        background-color: #e8cd96;
+        background-image:
+            linear-gradient(90deg, var(--color-kayu) 3px, transparent 3px),
+            linear-gradient(0deg, var(--color-kayu) 3px, transparent 3px);
+        background-size: 10px 10px;
     }
 
-    .marumado::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        opacity: 0.7;
-        background:
-            linear-gradient(var(--color-soga), var(--color-soga)) center / 4px 100% no-repeat,
-            linear-gradient(var(--color-soga), var(--color-soga)) center / 100% 4px no-repeat;
+    /* Bingkai jendela besar: kumiko | shoji | kumiko */
+    .jendela {
+        display: flex;
+        align-items: stretch;
+        border: 8px solid var(--color-kayu-gelap);
+        border-radius: 4px;
+        background: var(--color-kayu);
+        box-shadow:
+            0 0 45px rgb(242 185 75 / 0.4),
+            0 8px 20px rgb(0 0 0 / 0.45);
     }
 
-    /* Garis hias di bawah judul: ◆────── */
+    /* Papan kayu tegak */
+    .papan-kayu {
+        background-color: var(--color-kayu-gelap);
+        background-image: repeating-linear-gradient(
+            90deg,
+            transparent 0,
+            transparent 58px,
+            rgb(0 0 0 / 0.55) 58px,
+            rgb(0 0 0 / 0.55) 60px
+        );
+    }
+
+    /* Garis hias di bawah judul */
     .ornamen {
         display: flex;
         align-items: center;
@@ -96,5 +135,53 @@
         height: 1px;
         flex: 1;
         background: linear-gradient(to right, var(--color-emas), transparent);
+    }
+    /* Lampu bersinar di belakang logo */
+    .lampu {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 3;
+        width: 135%;
+        aspect-ratio: 1;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        border-radius: 9999px;
+        background: radial-gradient(
+            circle,
+            rgb(255 245 205 / 0.95) 0%,
+            rgb(255 208 105 / 0.7) 30%,
+            rgb(255 170 60 / 0.3) 55%,
+            transparent 72%
+        );
+        filter: blur(6px);
+        animation: lampu-berkedip 3.5s ease-in-out infinite;
+    }
+
+    @keyframes lampu-berkedip {
+        0%,
+        100% {
+            opacity: 0.75;
+            transform: translate(-50%, -50%) scale(0.95);
+        }
+        50% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.08);
+        }
+    }
+
+    /* Hormati pengguna yang mematikan animasi di perangkatnya */
+    @media (prefers-reduced-motion: reduce) {
+        .lampu {
+            animation: none;
+        }
+    }
+    /* Variasi shoji: kisi di BELAKANG foto */
+    .shoji-frame.kisi-belakang::after {
+        z-index: 0;
+    }
+
+    .shoji-frame.kisi-belakang::before {
+        z-index: 1;
     }
 }

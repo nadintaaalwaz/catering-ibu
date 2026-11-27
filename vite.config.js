@@ -12,7 +12,14 @@ export default defineConfig({
         }),
         tailwindcss(),
         inertia(),
-        vue(),
+        vue({
+            template: {
+                transformAssetUrls: {
+                    base: null,
+                    includeAbsolute: false,
+                },
+            },
+        }),
     ],
     server: {
         watch: {
